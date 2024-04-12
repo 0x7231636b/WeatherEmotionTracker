@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,12 +26,6 @@ public class MoodTrackingController {
   public ResponseEntity<Mood> createMood(@RequestBody Mood mood) {
     return new ResponseEntity<>(moodTrackingService.createMood(mood), HttpStatus.CREATED);
   }
-
-  @PostMapping("/addFast")
-  public ResponseEntity<Mood> postMethodName(@RequestParam byte value) {
-    return new ResponseEntity<>(moodTrackingService.createMoodWithValue(value), HttpStatus.CREATED);
-  }
-
 
   @GetMapping("/{id}")
   public ResponseEntity<Optional<Mood>> getMood(@PathVariable String id) {

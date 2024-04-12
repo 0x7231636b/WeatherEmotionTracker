@@ -17,6 +17,8 @@ public class Mood {
   @GenericGenerator(name = "uuid", strategy = "uuid2")
   private String id;
 
+  @ManyToOne
+  private User user;
 
   @Min(1)
   @Max(10)
