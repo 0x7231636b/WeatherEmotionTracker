@@ -1,3 +1,10 @@
 spring:
   application:
     name: weatheremotiontracker
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:postgresql://postgres/mydatabase
+    username: myuser
+    password: secret
