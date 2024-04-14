@@ -1,10 +1,10 @@
 package com.github.x7231636b.weatheremotiontracker.service;
 
 import com.github.x7231636b.weatheremotiontracker.entity.WeatherFeelingEntity;
-import com.github.x7231636b.weatheremotiontracker.mapper.WeatherDataMapper;
 import com.github.x7231636b.weatheremotiontracker.dto.WeatherData;
 import com.github.x7231636b.weatheremotiontracker.dto.WeatherFeelingDto;
 import com.github.x7231636b.weatheremotiontracker.entity.UserEntity;
+import com.github.x7231636b.weatheremotiontracker.entity.WeatherDataEntity;
 import com.github.x7231636b.weatheremotiontracker.repository.WeatherFeelingRepository;
 import com.github.x7231636b.weatheremotiontracker.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -32,8 +32,15 @@ public class WeatherFeelingService {
 
     WeatherData weatherData = weatherDataService.requestWeatherData(weatherFeeling.getLatitude(),
         weatherFeeling.getLongitude());
+    weatherData.setTimeStamp(weatherFeeling.getTimeStamp());
 
-    weatherFeelingEntity.setWeatherData(WeatherDataMapper.instance.toEntity(weatherData));
+    WeatherDataEntity weatherDataEntity = weatherDataService.storeWeatherData(weatherData);
+
+    weatherFeelingEntity.setWeatherData(weatherDataEntity);
+
+    weatherFeelingEntity.setMoodFeeling(weatherFeeling.getMoodFeeling());
+    weatherFeelingEntity.setWeatherFeeling(weatherFeeling.getWeatherFeeling());
+    weatherFeelingEntity.setTimeStamp(weatherFeeling.getTimeStamp());
 
     weatherDataRepository.save(weatherFeelingEntity);
   }

@@ -3,8 +3,10 @@ package com.github.x7231636b.weatheremotiontracker.service;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import com.github.x7231636b.weatheremotiontracker.dto.WeatherData;
+import com.github.x7231636b.weatheremotiontracker.entity.WeatherDataEntity;
 import com.github.x7231636b.weatheremotiontracker.feignclient.WeatherClient;
 import com.github.x7231636b.weatheremotiontracker.feignclient.response.WeatherResponse;
+import com.github.x7231636b.weatheremotiontracker.mapper.WeatherDataMapper;
 import com.github.x7231636b.weatheremotiontracker.repository.WeatherDataRepository;
 import lombok.RequiredArgsConstructor;
 
@@ -37,5 +39,9 @@ public class WeatherDataService {
     weatherData.setWindDegree(weatherResponse.getWind().getDeg());
 
     return weatherData;
+  }
+
+  public WeatherDataEntity storeWeatherData(WeatherData weatherData) {
+    return weatherDataRepository.save(WeatherDataMapper.instance.toEntity(weatherData));
   }
 }
