@@ -6,8 +6,8 @@ import jakarta.persistence.*;
 
 @Entity
 @Data
-@Table(name = "mood_user")
-public class User {
+@Table(name = "user_entity")
+public class UserEntity {
 
   @Id
   @GeneratedValue(generator = "uuid")

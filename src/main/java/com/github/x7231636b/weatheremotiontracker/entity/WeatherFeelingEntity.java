@@ -10,7 +10,7 @@ import javax.validation.constraints.Max;
 @Entity
 @Data
 @Table(name = "mood")
-public class Mood {
+public class WeatherFeelingEntity {
 
   @Id
   @GeneratedValue(generator = "uuid")
@@ -18,11 +18,18 @@ public class Mood {
   private String id;
 
   @ManyToOne
-  private User user;
+  private UserEntity user;
 
   @Min(1)
   @Max(10)
-  private byte value;
+  private byte moodFeeling;
+
+  @Min(1)
+  @Max(10)
+  private byte weatherFeeling;
+
+  @OneToOne
+  private WeatherDataEntity weatherData;
 
   @Nullable
   private Long timeStamp;
