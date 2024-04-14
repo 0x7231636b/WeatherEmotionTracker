@@ -25,5 +25,9 @@ public class WeatherDataEntity {
   private Double windGust;
   private Integer windDegree;
 
+  // This code is a reference to the weather condition:
+  // https://openweathermap.org/weather-conditions
+  private Integer weatherCode;
+
   private Long timeStamp;
 }

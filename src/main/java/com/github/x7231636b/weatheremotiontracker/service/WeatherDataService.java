@@ -37,6 +37,7 @@ public class WeatherDataService {
     weatherData.setWindSpeed(weatherResponse.getWind().getSpeed());
     weatherData.setWindGust(weatherResponse.getWind().getGust());
     weatherData.setWindDegree(weatherResponse.getWind().getDeg());
+    weatherData.setWeatherCode(weatherResponse.getWeather().get(0).getId());
 
     return weatherData;
   }

@@ -16,5 +16,7 @@ public class WeatherData {
   private Double windGust;
   private Integer windDegree;
 
+  private Integer weatherCode;
+
   private Long timeStamp;
 }
