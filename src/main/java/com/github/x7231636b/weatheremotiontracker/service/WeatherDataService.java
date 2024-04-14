@@ -1,17 +1,41 @@
 package com.github.x7231636b.weatheremotiontracker.service;
 
-import java.math.BigDecimal;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import com.github.x7231636b.weatheremotiontracker.dto.WeatherData;
+import com.github.x7231636b.weatheremotiontracker.feignclient.WeatherClient;
+import com.github.x7231636b.weatheremotiontracker.feignclient.response.WeatherResponse;
 import com.github.x7231636b.weatheremotiontracker.repository.WeatherDataRepository;
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class WeatherDataService {
-  final WeatherDataRepository weatherDataRepository;
+  // For later use
+  private final WeatherDataRepository weatherDataRepository;
 
-  public WeatherData requestWeatherData(BigDecimal latitude, BigDecimal longitude) {
-    return null;
+  private final WeatherClient weatherClient;
+
+  @Value("${weather.api.appid}")
+  private String appId;
+
+  @Value("${weather.api.units}")
+  private String units;
+
+  public WeatherData requestWeatherData(double latitude, double longitude) {
+    WeatherResponse weatherResponse =
+        weatherClient.getWeather(latitude, longitude, appId, "metric");
+    WeatherData weatherData = new WeatherData();
+    weatherData.setLatitude(latitude);
+    weatherData.setLongitude(longitude);
+    weatherData.setTemperature(weatherResponse.getMain().getTemp());
+    weatherData.setHumidity(weatherResponse.getMain().getHumidity());
+    weatherData.setAirPressure(weatherResponse.getMain().getPressure());
+    weatherData.setVisibility(weatherResponse.getVisibility());
+    weatherData.setWindSpeed(weatherResponse.getWind().getSpeed());
+    weatherData.setWindGust(weatherResponse.getWind().getGust());
+    weatherData.setWindDegree(weatherResponse.getWind().getDeg());
+
+    return weatherData;
   }
 }

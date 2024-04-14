@@ -18,11 +18,11 @@ FROM eclipse-temurin:21.0.2_13-jre-jammy
 # Copy the jar to the production image from the builder stage.
 COPY --from=build /app/build/libs/*.jar /app/app.jar
 
-# # Create 'weathermood' user
-# RUN adduser --disabled-password --gecos '' weathermood
+# # Create 'weatherfeeling' user
+# RUN adduser --disabled-password --gecos '' weatherfeeling
 
 # # Run the application under user "gradle" (non-root)
-# USER weathermood
+# USER weatherfeeling
 
 # Run the web service on container startup.
 CMD ["java", "-jar", "/app/app.jar"]

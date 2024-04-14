@@ -2,7 +2,6 @@ package com.github.x7231636b.weatheremotiontracker.dto;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import java.math.BigDecimal;
 import lombok.Data;
 
 @Data
@@ -17,8 +16,8 @@ public class WeatherFeelingDto {
   @Max(10)
   private byte weatherFeeling;
 
-  private BigDecimal latitude;
-  private BigDecimal longitude;
+  private double latitude;
+  private double longitude;
 
   private Long timeStamp;
 }

@@ -67,7 +67,7 @@ public class WeatherFeelingService {
     Optional<WeatherFeelingEntity> weatherFeelingOptional = weatherDataRepository.findById(id);
 
     if (!weatherFeelingOptional.isPresent()) {
-      throw new RuntimeException("Mood not found with id " + id);
+      throw new RuntimeException("Entry not found with id " + id);
     }
 
     WeatherFeelingEntity weatherFeeling = weatherFeelingOptional.get();

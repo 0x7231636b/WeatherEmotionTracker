@@ -1,6 +1,5 @@
 package com.github.x7231636b.weatheremotiontracker.entity;
 
-import java.math.BigDecimal;
 import org.hibernate.annotations.GenericGenerator;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -15,12 +14,12 @@ public class WeatherDataEntity {
   @GenericGenerator(name = "uuid", strategy = "uuid2")
   private String id;
 
-  private BigDecimal latitude;
-  private BigDecimal longitude;
+  private double latitude;
+  private double longitude;
 
-  private Float temperature;
-  private Float humidity;
-  private Float airPressure;
+  private Double temperature;
+  private Double humidity;
+  private Double airPressure;
   private Integer visibility;
   private Double windSpeed;
   private Double windGust;

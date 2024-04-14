@@ -1,3 +1,8 @@
+weather:
+  api:
+    appid: your-api-key
+    units: metric
+
 spring:
   application:
     name: weatheremotiontracker

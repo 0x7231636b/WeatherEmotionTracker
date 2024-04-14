@@ -3,7 +3,7 @@
 function postDrinkData() {
   local timeStamp=$1
   local value=$((1 + $RANDOM % 10))
-  local url="http://localhost:8080/mood/add"
+  local url="http://localhost:8080/weather-feeling/add"
 
   curl --request POST \
     --url $url \

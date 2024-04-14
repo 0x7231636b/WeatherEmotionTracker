@@ -1,6 +1,6 @@
 version: '3.8'
 services:
-  weather-mood-tracker:
+  weather-feeling-tracker:
     build: 
       context: .
       dockerfile: Dockerfile
@@ -11,7 +11,7 @@ services:
   postgres:
     image: postgres:latest
     environment:
-      POSTGRES_DB: weather_mood_tracker
+      POSTGRES_DB: weather_feeling_tracker
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:

@@ -9,7 +9,7 @@ import javax.validation.constraints.Max;
 
 @Entity
 @Data
-@Table(name = "mood")
+@Table(name = "feeling")
 public class WeatherFeelingEntity {
 
   @Id

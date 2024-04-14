@@ -1,17 +1,16 @@
 package com.github.x7231636b.weatheremotiontracker.dto;
 
-import java.math.BigDecimal;
 import lombok.Data;
 
 @Data
 public class WeatherData {
 
-  private BigDecimal latitude;
-  private BigDecimal longitude;
+  private Double latitude;
+  private Double longitude;
 
-  private Float temperature;
-  private Float humidity;
-  private Float airPressure;
+  private Double temperature;
+  private Integer humidity;
+  private Integer airPressure;
   private Integer visibility;
   private Double windSpeed;
   private Double windGust;
