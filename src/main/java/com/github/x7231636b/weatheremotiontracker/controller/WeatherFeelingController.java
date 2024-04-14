@@ -1,7 +1,6 @@
 package com.github.x7231636b.weatheremotiontracker.controller;
 
 import com.github.x7231636b.weatheremotiontracker.dto.WeatherFeelingDto;
-import com.github.x7231636b.weatheremotiontracker.entity.WeatherFeelingEntity;
 import com.github.x7231636b.weatheremotiontracker.service.WeatherFeelingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
