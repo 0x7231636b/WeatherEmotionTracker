@@ -8,3 +8,9 @@ spring:
     url: jdbc:postgresql://postgres/mydatabase
     username: myuser
     password: secret
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
