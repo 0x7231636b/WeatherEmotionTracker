@@ -1,6 +1,6 @@
 package com.github.x7231636b.weatheremotiontracker.controller;
 
-import com.github.x7231636b.weatheremotiontracker.dto.WeatherFeelingDto;
+import com.github.x7231636b.weatheremotiontracker.dto.WeatherFeeling;
 import com.github.x7231636b.weatheremotiontracker.service.WeatherFeelingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -23,18 +23,18 @@ public class WeatherFeelingController {
   private final WeatherFeelingService weatherFeelingService;
 
   @PostMapping("/add")
-  public ResponseEntity<Void> createWeatherFeeling(@RequestBody WeatherFeelingDto weatherFeeling) {
+  public ResponseEntity<Void> createWeatherFeeling(@RequestBody WeatherFeeling weatherFeeling) {
     weatherFeelingService.createWeatherFeeling(weatherFeeling);
     return new ResponseEntity<>(HttpStatus.CREATED);
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<Optional<WeatherFeelingDto>> getWeatherFeeling(@PathVariable String id) {
+  public ResponseEntity<Optional<WeatherFeeling>> getWeatherFeeling(@PathVariable String id) {
     return new ResponseEntity<>(weatherFeelingService.getWeatherFeeling(id), HttpStatus.OK);
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<Void> updateWeatherFeeling(@RequestBody WeatherFeelingDto weatherFeelingDto,
+  public ResponseEntity<Void> updateWeatherFeeling(@RequestBody WeatherFeeling weatherFeelingDto,
       @PathVariable String id) {
     try {
       weatherFeelingService.updateWeatherFeeling(weatherFeelingDto, id);

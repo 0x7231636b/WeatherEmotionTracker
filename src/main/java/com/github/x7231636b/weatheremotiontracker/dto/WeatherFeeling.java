@@ -5,7 +5,7 @@ import javax.validation.constraints.Min;
 import lombok.Data;
 
 @Data
-public class WeatherFeelingDto {
+public class WeatherFeeling {
   private String username;
 
   @Min(1)

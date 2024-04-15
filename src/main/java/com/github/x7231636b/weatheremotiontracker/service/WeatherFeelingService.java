@@ -2,7 +2,7 @@ package com.github.x7231636b.weatheremotiontracker.service;
 
 import com.github.x7231636b.weatheremotiontracker.entity.WeatherFeelingEntity;
 import com.github.x7231636b.weatheremotiontracker.dto.WeatherData;
-import com.github.x7231636b.weatheremotiontracker.dto.WeatherFeelingDto;
+import com.github.x7231636b.weatheremotiontracker.dto.WeatherFeeling;
 import com.github.x7231636b.weatheremotiontracker.entity.UserEntity;
 import com.github.x7231636b.weatheremotiontracker.entity.WeatherDataEntity;
 import com.github.x7231636b.weatheremotiontracker.repository.WeatherFeelingRepository;
@@ -20,7 +20,7 @@ public class WeatherFeelingService {
 
   private final WeatherDataService weatherDataService;
 
-  public void createWeatherFeeling(WeatherFeelingDto weatherFeeling) {
+  public void createWeatherFeeling(WeatherFeeling weatherFeeling) {
     if (weatherFeeling.getTimeStamp() == null) {
       weatherFeeling.setTimeStamp(System.currentTimeMillis());
     }
@@ -54,7 +54,7 @@ public class WeatherFeelingService {
     return user;
   }
 
-  public Optional<WeatherFeelingDto> getWeatherFeeling(String id) {
+  public Optional<WeatherFeeling> getWeatherFeeling(String id) {
 
     Optional<WeatherFeelingEntity> weatherFeelingOptional = weatherDataRepository.findById(id);
 
@@ -63,14 +63,14 @@ public class WeatherFeelingService {
     }
 
     WeatherFeelingEntity weatherFeeling = weatherFeelingOptional.get();
-    WeatherFeelingDto weatherFeelingRequest = new WeatherFeelingDto();
+    WeatherFeeling weatherFeelingRequest = new WeatherFeeling();
     weatherFeelingRequest.setMoodFeeling(weatherFeeling.getMoodFeeling());
     weatherFeelingRequest.setWeatherFeeling(weatherFeeling.getWeatherFeeling());
 
     return Optional.of(weatherFeelingRequest);
   }
 
-  public void updateWeatherFeeling(WeatherFeelingDto weatherFeelingRequest, String id) {
+  public void updateWeatherFeeling(WeatherFeeling weatherFeelingRequest, String id) {
     Optional<WeatherFeelingEntity> weatherFeelingOptional = weatherDataRepository.findById(id);
 
     if (!weatherFeelingOptional.isPresent()) {
