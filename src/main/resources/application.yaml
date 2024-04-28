@@ -1,6 +1,6 @@
 weather:
   api:
-    appid: your-api-key
+    key: ${API_KEY}
     units: metric
 
 spring:

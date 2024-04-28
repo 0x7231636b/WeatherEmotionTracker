@@ -18,15 +18,15 @@ public class WeatherDataService {
 
   private final WeatherClient weatherClient;
 
-  @Value("${weather.api.appid}")
-  private String appId;
+  @Value("${weather.api.key}")
+  private String apiKey;
 
   @Value("${weather.api.units}")
   private String units;
 
   public WeatherData requestWeatherData(double latitude, double longitude) {
     WeatherResponse weatherResponse =
-        weatherClient.getWeather(latitude, longitude, appId, "metric");
+        weatherClient.getWeather(latitude, longitude, apiKey, "metric");
     WeatherData weatherData = new WeatherData();
     weatherData.setLatitude(latitude);
     weatherData.setLongitude(longitude);
