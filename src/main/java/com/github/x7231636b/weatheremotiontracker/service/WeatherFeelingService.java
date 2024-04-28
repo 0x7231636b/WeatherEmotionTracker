@@ -1,8 +1,10 @@
 package com.github.x7231636b.weatheremotiontracker.service;
 
 import com.github.x7231636b.weatheremotiontracker.entity.WeatherFeelingEntity;
+import com.github.x7231636b.weatheremotiontracker.mapper.WeatherFeelingMapper;
 import com.github.x7231636b.weatheremotiontracker.dto.WeatherData;
 import com.github.x7231636b.weatheremotiontracker.dto.WeatherFeeling;
+import com.github.x7231636b.weatheremotiontracker.dto.WeatherFeelingDto;
 import com.github.x7231636b.weatheremotiontracker.entity.UserEntity;
 import com.github.x7231636b.weatheremotiontracker.entity.WeatherDataEntity;
 import com.github.x7231636b.weatheremotiontracker.repository.WeatherFeelingRepository;
@@ -10,12 +12,13 @@ import com.github.x7231636b.weatheremotiontracker.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class WeatherFeelingService {
 
-  private final WeatherFeelingRepository weatherDataRepository;
+  private final WeatherFeelingRepository weatherFeelingRepository;
   private final UserRepository userRepository;
 
   private final WeatherDataService weatherDataService;
@@ -42,7 +45,9 @@ public class WeatherFeelingService {
     weatherFeelingEntity.setWeatherFeeling(weatherFeeling.getWeatherFeeling());
     weatherFeelingEntity.setTimeStamp(weatherFeeling.getTimeStamp());
 
-    weatherDataRepository.save(weatherFeelingEntity);
+    System.out.println("About to store weather feeling:" + weatherFeelingEntity);
+
+    weatherFeelingRepository.save(weatherFeelingEntity);
   }
 
   private UserEntity createUserIfNonexistent(String username) {
@@ -56,7 +61,7 @@ public class WeatherFeelingService {
 
   public Optional<WeatherFeeling> getWeatherFeeling(String id) {
 
-    Optional<WeatherFeelingEntity> weatherFeelingOptional = weatherDataRepository.findById(id);
+    Optional<WeatherFeelingEntity> weatherFeelingOptional = weatherFeelingRepository.findById(id);
 
     if (!weatherFeelingOptional.isPresent()) {
       return Optional.empty();
@@ -71,7 +76,7 @@ public class WeatherFeelingService {
   }
 
   public void updateWeatherFeeling(WeatherFeeling weatherFeelingRequest, String id) {
-    Optional<WeatherFeelingEntity> weatherFeelingOptional = weatherDataRepository.findById(id);
+    Optional<WeatherFeelingEntity> weatherFeelingOptional = weatherFeelingRepository.findById(id);
 
     if (!weatherFeelingOptional.isPresent()) {
       throw new RuntimeException("Entry not found with id " + id);
@@ -82,15 +87,23 @@ public class WeatherFeelingService {
     weatherFeeling.setMoodFeeling(weatherFeelingRequest.getMoodFeeling());
     weatherFeeling.setWeatherFeeling(weatherFeelingRequest.getWeatherFeeling());
 
-    weatherDataRepository.save(weatherFeeling);
+    weatherFeelingRepository.save(weatherFeeling);
   }
 
   public void deleteWeatherFeeling(String id) {
-    weatherDataRepository.deleteById(id);
+    weatherFeelingRepository.deleteById(id);
   }
 
   public void deleteWeatherFeeling(long timeStamp) {
-    weatherDataRepository.deleteByTimeStamp(timeStamp);
+    weatherFeelingRepository.deleteByTimeStamp(timeStamp);
+  }
+
+  public List<WeatherFeelingDto> getAllWeatherFeelings(String username) {
+    UserEntity userEntity = userRepository.findByUsername(username).orElseThrow();
+
+    List<WeatherFeelingEntity> weatherFeelingEntity =
+        weatherFeelingRepository.findAllByUser(userEntity);
+    return WeatherFeelingMapper.INSTANCE.toDtoList(weatherFeelingEntity);
   }
 
 }

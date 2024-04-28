@@ -25,6 +25,7 @@ public class WeatherDataService {
   private String units;
 
   public WeatherData requestWeatherData(double latitude, double longitude) {
+    System.out.println("apiKey: " + apiKey);
     WeatherResponse weatherResponse =
         weatherClient.getWeather(latitude, longitude, apiKey, "metric");
     WeatherData weatherData = new WeatherData();
