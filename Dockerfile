@@ -13,7 +13,7 @@ RUN gradle clean build --no-daemon
 
 # Use AdoptOpenJDK for base image.
 # It's important to use OpenJDK 8u191 or above that has container support enabled.
-FROM eclipse-temurin:21.0.2_13-jre-jammy
+FROM eclipse-temurin:21-jre-jammy
 
 # Copy the jar to the production image from the builder stage.
 COPY --from=build /app/build/libs/*.jar /app/app.jar
